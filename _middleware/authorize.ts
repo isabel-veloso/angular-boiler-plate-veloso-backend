@@ -1,8 +1,7 @@
 import jwt from 'express-jwt';
-import config from '../config.json';
 import db from '../_helpers/db';
 
-const { secret } = config;
+const secret = process.env.JWT_SECRET || 'veloso-jwt-secret-ipt2026';
 
 export default function authorize(roles: any = []) {
     if (typeof roles === 'string') {
