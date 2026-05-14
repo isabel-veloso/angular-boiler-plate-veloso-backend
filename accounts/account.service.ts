@@ -1,4 +1,4 @@
-import config from '../config.json';
+const config = { secret: process.env.JWT_SECRET || 'veloso-jwt-secret-ipt2026' };
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
