@@ -22,7 +22,12 @@ export async function initializeDb() {
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
     await connection.end();
 
-    const sequelize = new Sequelize(database, user, password, { host, dialect: 'mysql', logging: false });
+    const sequelize = new Sequelize(database, user, password, {
+        host,
+        port,
+        dialect: 'mysql',
+        logging: console.log
+    });
 
     db.Account = accountModel(sequelize);
     db.RefreshToken = refreshTokenModel(sequelize);
