@@ -6,9 +6,12 @@ import refreshTokenModel from '../accounts/refresh-token.model';
 const db: any = {};
 export default db;
 
-initialize();
+let initialized = false;
 
-async function initialize() {
+export async function initializeDb() {
+    if (initialized) return;
+    initialized = true;
+
     const host = process.env.DB_HOST!;
     const port = Number(process.env.DB_PORT) || 3306;
     const user = process.env.DB_USER!;
@@ -17,8 +20,9 @@ async function initialize() {
 
     const connection = await mysql.createConnection({ host, port, user, password });
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
+    await connection.end();
 
-    const sequelize = new Sequelize(database, user, password, { host, dialect: 'mysql' });
+    const sequelize = new Sequelize(database, user, password, { host, dialect: 'mysql', logging: false });
 
     db.Account = accountModel(sequelize);
     db.RefreshToken = refreshTokenModel(sequelize);
