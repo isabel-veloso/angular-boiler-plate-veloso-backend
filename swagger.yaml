@@ -4,8 +4,10 @@ info:
   description: Node.js + MySQL - API with email sign-up, verification, authentication and forgot password
   version: 1.0.0
 servers:
-  - url: https://angular-boiler-plate-veloso-backend-production.up.railway.app
-    description: Production server
+  - url: 'http://localhost:3000'
+    description: 'Local server'
+  - url: 'https://angular-boiler-plate-veloso-backend-production.up.railway.app'
+    description: 'Production server'
 paths:
   /accounts/register:
     post:
